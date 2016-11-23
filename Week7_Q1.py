@@ -1,3 +1,23 @@
+class Stack:
+    def __init__(self):
+        self.items = []
+
+    def isEmpty(self):
+        return self.items == []
+
+    def push(self, item):
+        self.items.append(item)
+
+    def pop(self):
+        return self.items.pop()
+
+    def peek(self):
+        return self.items[len(self.items) - 1]
+
+    def size(self):
+        return len(self.items)
+
+
 class Graph():
 
     def __init__(self):
@@ -26,6 +46,23 @@ class Graph():
         self.edges[node1].append(node2)
         self.edges[node2].append(node1)
 
+    def DFS(self, start):
+        S = Stack()
+        visited = []
+        S.push(start)
+        print(S.items)
+        while S != None:
+            u = S.pop()
+            print("LOL" , S.items)
+            print("LEL",u)
+            if u not in visited:
+                visited.append(u)
+                print("visited" ,visited)
+                for self.edges in range(u):
+                    S.push(self.edges)
+        return visited
+
+
 if __name__ == '__main__':
     g = Graph()
     g.addVertex(1)
@@ -42,6 +79,8 @@ if __name__ == '__main__':
     for node in g.edges:
         print(node, ":", g.edges[node])
     print(g.printVertices())
+    g.DFS(1)
+
 
 
 
