@@ -17,6 +17,22 @@ class Stack:
     def size(self):
         return len(self.items)
 
+class Queue:
+    def __init__(self):
+        self.items = []
+
+    def isEmpty(self):
+        return self.items == []
+
+    def enqueue(self, item):
+        self.items.insert(0,item)
+
+    def dequeue(self):
+        return self.items.pop()
+
+    def size(self):
+        return len(self.items)
+
 
 class Graph():
 
@@ -47,20 +63,30 @@ class Graph():
         self.edges[node2].append(node1)
 
     def DFS(self, start):
-        S = Stack()
         visited = []
-        S.push(start)
-        print(S.items)
-        while S != None:
-            u = S.pop()
-            print("LOL" , S.items)
-            print("LEL",u)
+        stack = Stack()
+        stack.push(start)
+        while stack.isEmpty() == False:
+            u = stack.pop()
             if u not in visited:
                 visited.append(u)
-                print("visited" ,visited)
-                for self.edges in range(u):
-                    S.push(self.edges)
+                for edge in self.edges[u]:
+                    stack.push(edge)
+        return(visited)
+
+    def BFS(self, start):
+        Q = Queue()
+        visited = []
+        Q.enqueue(start)
+        while Q.isEmpty() == False:
+            u = Q.dequeue()
+            if u not in visited:
+                visited.append(u)
+                for edge in self.edges[u]:
+                    Q.enqueue(edge)
         return visited
+
+
 
 
 if __name__ == '__main__':
@@ -79,8 +105,8 @@ if __name__ == '__main__':
     for node in g.edges:
         print(node, ":", g.edges[node])
     print(g.printVertices())
-    g.DFS(1)
-
+    print(g.DFS(7))
+    print(g.BFS(7))
 
 
 
