@@ -1,16 +1,17 @@
+import math
 class Graph():
 
     def __init__(self):
         self.nodes = []
-        self.edges = dict()
+        self.edges = {}
         self.weights = {}
-
-
+        self.prev = None
 
     def addVertex(self,value):
         self.nodes.append(value)
 
         if value in self.nodes:
+            self.weights[value] = {}
             self.edges[value] = []
         else:
             pass
@@ -21,65 +22,57 @@ class Graph():
         if node1 not in self.nodes or node2 not in self.nodes:
             pass
         else:
-            self.edges[node1].append(node2)
-            self.edges[node2].append(node1)
-            self.weights[(node1, node2)] = weight
+            #1st way of storing weights
+            #self.edges[node1].append(node2)
+            #self.edges[node2].append(node1)
+            #self.weights[(node1, node2)] = weight
 
-    def dijsktra(self, start):
-        visited = {start: 0}
-        path = {}
+            #2nd way of storing weights
+            edge1 = dict({node2: weight})
+            edge2 = dict({node1: weight})
+            self.weights[node1].update(edge1)
+            self.weights[node2].update(edge2)
 
-        nodes = set(self.nodes)
-
-        while nodes:
-            min_node = None
-            for node in nodes:
-                if node in visited:
-                    if min_node is None:
-                        min_node = node
-                    elif visited[node] < visited[min_node]:
-                        min_node = node
-
-            if min_node is None:
-                break
-
-            nodes.remove(min_node)
-            current_weight = visited[min_node]
-
-            for edge in self.edges[min_node]:
-                print(path)
-                weeights = current_weight + self.weights[(min_node, edge)]
-                if edge not in visited or weight < visited[edge]:
-                    visited[edge] = weeights
-                    path[edge] = min_node
-
-        return visited, path
-
-
-
-
-
+    def dijsktra(self, start, end):
+        v = start
+        previous = []
+        for k, e in self.weights.items():
+            self.weights[k] = math.inf
+        self.weights[start] = 0
+        visited = []
+        while v != end:
+            for u in self.weights:
+                if (self.weights[v] + self.weights[v]) < self.weights[v]:
+                    self.weights[u] =  (self.weights[v] + self.weights[v[u]])
+                    previous.append(v)
+                    previous[u] = v
+            visited.append(v)
+            min = math.inf
+            for n in visited:
+                if n not in visited:
+                    v = n
+                    min = self.weights[n]
+        return visited, previous
 
 if __name__ == '__main__':
     g = Graph()
-    g.addVertex(1)
-    g.addVertex(5)
-    g.addVertex(3)
-    g.addVertex(4)
-    g.addVertex(10)
-    g.addVertex(7)
-    g.addEdges(1,5,5)
-    g.addEdges(1,3,2)
-    g.addEdges(10,7,4)
-    g.addEdges(4,10,3)
-    g.addEdges(5,10,1)
-    for node in g.edges:
-       print(node, ":", g.edges[node])
-    print(g.printVertices())
-    for weight in g.weights:
-        print(weight, ":", g.weights[weight])
+    for i in (22, 33, 44, 55, 66, 77, 88):
+        g.addVertex(i)
+    g.addEdges(22,33,5)
+    g.addEdges(33,55,2)
+    g.addEdges(44,66,4)
+    g.addEdges(55,88,3)
+    g.addEdges(77,22,1)
+    g.addEdges(55,44, 6)
+    #for node in g.edges:
+     #  print("EDGES " ,node, ":", g.edges[node])
+    #print(g.printVertices())
+    for nodes in g.weights:
+        print("WEIGHTS " ,nodes, ":", g.weights[nodes])
+    print(g.weights[33][22]) #How to access the weights in the dictionary
+    print(g.weights[33])
 
-    g.dijsktra(1)
+    print((g.dijsktra(22,77)))
 
 
 
