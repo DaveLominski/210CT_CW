@@ -32,7 +32,7 @@ def postorder(tree):
 
 
 def in_order(tree):
-    s = []
+    s = []                              #initializing an empty stack
 
     while True:
         if tree != None:

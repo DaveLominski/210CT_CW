@@ -1,7 +1,7 @@
 def trailingZeros():
-    number = int(input("Give me a number: "))           #Asking a user for a number to check
+    number = int(input("Give me a number: "))
 
-    trailing = 0                                        #A starting value for a variable
+    trailing = 0
     for i in range(5, number+1):                        #A for loop checking every number between 5 and the number user inputted + 1
         factorial = int(i)                              #making sure i is an integer data type
         while factorial:                                #an infinite while loop to make sure the calculations below is made for each number

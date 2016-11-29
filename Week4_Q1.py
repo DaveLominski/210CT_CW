@@ -15,7 +15,7 @@ def binarySearch(array, a, b):
     print(itemFound)
 
 
-binarySearch([1,5,7,8,9,10,15],5,10)
+binarySearch([1,7,10,15,30,100,343],1,100)
 
 
 

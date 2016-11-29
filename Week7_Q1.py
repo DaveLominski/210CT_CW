@@ -41,50 +41,50 @@ class Graph():
         self.edges = dict()
 
 
-
     def addVertex(self,value):
-        self.nodes.append(value)
+        self.nodes.append(value)                        #adding a node value to a list
+        self.edges[value] = []                          #adding a node to a dictionary and creating an empty list for the edges
 
-        if value in self.nodes:
-            self.edges[value] = []
-        else:
-            pass
     def printVertices(self):
-        return self.nodes
+        return self.nodes                               #returning the nodes list
 
     def addEdges(self, node1, node2):
-        if node1 not in self.nodes:
+        if node1 not in self.nodes:                     #if nodes not in the nodes list, append the nodes to the list
             self.nodes.append(node1)
 
         if node2 not in self.nodes:
             self.nodes.append(node2)
 
-        self.edges[node1].append(node2)
+        self.edges[node1].append(node2)                 #adding the edges to the dictionaries, the edges are being added to an empty list created earlier
         self.edges[node2].append(node1)
 
     def DFS(self, start):
         visited = []
         stack = Stack()
-        stack.push(start)
-        while stack.isEmpty() == False:
-            u = stack.pop()
+        stack.push(start)                               #pushing the starting node to the stack
+        while stack.isEmpty() == False:                 #while stack is not empty
+            u = stack.pop()                             #pop the node from the stack and make it = u
             if u not in visited:
-                visited.append(u)
-                for edge in self.edges[u]:
-                    stack.push(edge)
-        return(visited)
+                visited.append(u)                       #if the node is not in visited, append it to the visited
+                for edge in self.edges[u]:              #for all the edges = the value of u
+                    stack.push(edge)                    #push the edges to the stack
+        dfsText = open("dfsTraversalOutput.txt", "w")   #open a new text document, and set it's mode to write
+        dfsText.write("DFS Traversal: %s " % visited)   #write the list to the file
+        dfsText.close()                                 #close the file
 
     def BFS(self, start):
         Q = Queue()
         visited = []
-        Q.enqueue(start)
-        while Q.isEmpty() == False:
-            u = Q.dequeue()
+        Q.enqueue(start)                                #enqueuing the first node to the queue
+        while Q.isEmpty() == False:                     #while queue is not empty
+            u = Q.dequeue()                             #dequeue the node from queue and make it = u
             if u not in visited:
-                visited.append(u)
-                for edge in self.edges[u]:
-                    Q.enqueue(edge)
-        return visited
+                visited.append(u)                       #if the node not in visited, append it to visited
+                for edge in self.edges[u]:              #for all the edges = to the value of u
+                    Q.enqueue(edge)                     #enqueue the edges to the queue
+        bfsText = open("bfsTraversalOutput.txt", "w")   #open a new text document, and set it's mode to write
+        bfsText.write("BFS Traversal: %s " % visited)   #write the list to the file
+        bfsText.close()                                 #close the file
 
 
 
