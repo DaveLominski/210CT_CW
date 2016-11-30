@@ -18,4 +18,4 @@ def primeNumber(number, counter=None):
         return primeNumber(number, counter - 1)
     
 
-primeNumber(69)
+primeNumber(11)

@@ -47,7 +47,9 @@ if __name__ == '__main__':
     l.insert(None, Node(4))
     l.insert(l.head,Node(6))
     l.insert(l.head,Node(8))
-    l.listRemove(l.head.next)
+    l.insert(l.tail,Node(9))
+    l.insert(l.tail, Node(10))
+    l.listRemove(l.head.next.next)
 
     l.display()
 

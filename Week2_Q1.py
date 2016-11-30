@@ -12,4 +12,4 @@ def perfSq(number):
     else:
         print("Error ! Try again with a positive integer")
 
-print(perfSq(69))
+print(perfSq(100))

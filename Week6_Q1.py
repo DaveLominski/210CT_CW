@@ -35,14 +35,14 @@ def in_order(tree):
     s = []                              #initializing an empty stack
 
     while True:
-        if tree != None:
-            s.append(tree)
-            tree = tree.left
-        else:
-            if len(s) > 0:
-                tree = s.pop()
-                print(tree.value)
-                tree = tree.right
+        if tree != None:                #if tree does not equal None
+            s.append(tree)              #add the tree value to the stack
+            tree = tree.left            #move to the left value
+        else:                           #if there is nothing to the left of the tree value
+            if len(s) > 0:              #if length of s is more than 0
+                tree = s.pop()          # pop from the stack
+                print(tree.value)       #print the tree value
+                tree = tree.right       #move to the right of the tree value
 
             else:
                 return False
